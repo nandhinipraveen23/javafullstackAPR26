@@ -1,0 +1,13 @@
+.metadata
+.log
+.tmp
+.cache
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# Java
+target
+bin
