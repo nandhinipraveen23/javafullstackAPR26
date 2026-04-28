@@ -1,0 +1,55 @@
+ 
+
+class Billing{
+
+CreditCardPayment c;
+gPayPayment  g;
+
+Upi u;
+
+Billing (CreditCardPayment c)
+{
+this.c=c;
+c.pay();
+}
+Billing (gPayPayment  g)
+{
+this.g=g;
+g.pay();
+}
+ 
+
+ 
+}
+class CreditCardPayment  {
+	public void pay(double amount)
+	{
+		System.out.println("im creditcard  mode: "+amount);
+	}
+}
+class gPayPayment {
+	public void pay(double amount)
+	{
+		System.out.println("im gPay mode  : "+amount);
+	}
+}
+
+class UpiPayment {
+	public void pay(double amount)
+	{
+		System.out.println("im upi mode  : "+amount);
+	}
+}
+
+
+
+public class Shopping{
+
+public static void main(String[] args) {
+CreditCardPayment  c=new CreditCardPayment ();
+
+ Billing b = new  Billing(c);
+
+
+}
+}

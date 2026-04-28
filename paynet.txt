@@ -1,0 +1,44 @@
+interface Payment
+{
+
+void pay(double amount);
+}
+
+class Billing{
+
+
+Payment paymentMode;
+
+
+Billing (Payment paymentMode)
+{
+this.paymentMode=paymentMode;
+
+}
+
+paymentMode.pay();
+}
+class CreditCardPayment implements Payment{
+	public void pay(double amount)
+	{
+		System.out.println("im creditcard  mode: "+amount);
+	}
+}
+class gPayPayment implements Payment{
+	public void pay(double amount)
+	{
+		System.out.println("im gPay mode  : "+amount);
+	}
+}
+
+
+public class Shopping{
+
+public static void main(String[] args) {
+CreditCardPayment  c=new CreditCardPayment ();
+
+ Billing b = new  Billing(c);
+
+
+}
+}
