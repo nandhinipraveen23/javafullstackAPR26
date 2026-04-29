@@ -1,7 +1,7 @@
 package day2.oops;
 
 interface Payment{
-	void pay(double amount);
+public abstract	void pay(double amount);
 }
 class CreditCardPaymentt implements Payment {
 	public void pay(double amount)
