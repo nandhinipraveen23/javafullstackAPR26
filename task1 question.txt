@@ -1,0 +1,146 @@
+E-Commerce Design (Scenario-Based)
+🔥 Problem Statement (Real-world constraints)
+
+You are building an e-commerce system with the following rules:
+
+✅ Constraints
+Every product must have:
+id, name, price, qty
+Some products have discount, some don’t
+Payment methods should be flexible:
+UPI, Credit Card, COD
+Delivery charges vary:
+Free above ₹1000
+Otherwise ₹50
+Only online payments get extra 5% discount
+You cannot create object of Product directly
+Payment logic should be loosely coupled
+Add test cases for:
+Discount
+Payment type
+Delivery charge
+No discount
+
+
+ Approach
+  Abstract Class → Product
+Common fields + partial implementation
+Force child classes to define discount (abstract double applyDiscount(double totalAmount))
+create :  public double getTotalPrice(), public double getDeliveryCharge(double amount)
+ Interface → Payment
+Completely abstract → different implementations
+
+==============================
+
+ 
+========================
+
+public class MainApp {
+
+    public static void main(String[] args) {
+
+        // Test Case 1: Electronics + UPI
+        Product p1 = new Electronics(1, "Laptop", 1200, 1);
+        Payment pay1 = new UPI();
+
+        System.out.println("----- Test Case 1 -----");
+        OrderService.placeOrder(p1, pay1);
+
+
+        // Test Case 2: Clothing + Credit Card
+        Product p2 = new Clothing(2, "Shirt", 400, 2);
+        Payment pay2 = new CreditCard();
+
+        System.out.println("\n----- Test Case 2 -----");
+        OrderService.placeOrder(p2, pay2);
+
+
+        // Test Case 3: Clothing + COD
+        Product p3 = new Clothing(3, "T-Shirt", 250, 2);
+        Payment pay3 = new COD();
+
+        System.out.println("\n----- Test Case 3 -----");
+        OrderService.placeOrder(p3, pay3);
+
+
+        // Test Case 4: Grocery + COD
+        Product p4 = new Grocery(4, "Rice Bag", 450, 2);
+        Payment pay4 = new COD();
+
+        System.out.println("\n----- Test Case 4 -----");
+        OrderService.placeOrder(p4, pay4);
+
+
+
+
+// Test Case 5: Stationery + COD (NO DISCOUNT)
+Product p5 = new Stationery(5, "Notebook", 200, 2);
+Payment pay5 = new COD();
+
+System.out.println("\n----- Test Case 5 (No Discount) -----");
+OrderService.placeOrder(p5, pay5);
+
+
+
+    }
+}
+===============================
+
+----- Test Case 1 -----
+Product: Laptop
+Price per unit: 1200
+Quantity: 1
+Total Price: 1200
+Discount: 120
+Delivery Charge: 0
+Final Amount Before Payment: 1080
+Paid using UPI: 1026
+Final Paid Amount: 1026
+
+----- Test Case 2 -----
+Product: Shirt
+Price per unit: 400
+Quantity: 2
+Total Price: 800
+Discount: 160
+Delivery Charge: 50
+Final Amount Before Payment: 690
+Paid using Credit Card: 655.5
+Final Paid Amount: 655.5
+
+----- Test Case 3 -----
+Product: T-Shirt
+Price per unit: 250
+Quantity: 2
+Total Price: 500
+Discount: 100
+Delivery Charge: 50
+Final Amount Before Payment: 450
+Paid using Cash on Delivery: 450
+Final Paid Amount: 450
+
+----- Test Case 4 -----
+Product: Rice Bag
+Price per unit: 450
+Quantity: 2
+Total Price: 900
+Discount: 45
+Delivery Charge: 50
+Final Amount Before Payment: 905
+Paid using Cash on Delivery: 905
+Final Paid Amount: 905
+
+
+
+----- Test Case 5 -----
+Product: Notebook
+Price per unit: 200
+Quantity: 2
+Total Price: 400
+Discount: 0
+Delivery Charge: 50
+Final Amount Before Payment: 450
+Paid using Cash on Delivery: 450
+Final Paid Amount: 450
+====================
+
